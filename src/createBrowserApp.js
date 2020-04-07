@@ -81,7 +81,7 @@ export default function createBrowserApp(App, { history: historyOption } = {}) {
 
   class WebApp extends React.Component {
     state = { nav: App.router.getStateForAction(initAction) };
-    _title = document.title;
+    _title = '';
     _actionEventSubscribers = new Set();
     componentDidMount() {
       setHistoryListener(this.dispatch);
@@ -104,9 +104,6 @@ export default function createBrowserApp(App, { history: historyOption } = {}) {
       const activeNav = this._navigation.getChildNavigation(childKey);
       const opts = App.router.getScreenOptions(activeNav);
       this._title = opts.title || opts.headerTitle;
-      if (this._title) {
-        document.title = this._title;
-      }
     }
 
     _onNavigationStateChange(prevNav, nav, action) {
